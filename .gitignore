@@ -17,3 +17,5 @@
 
 
 /.idea
+/nginx/error.log
+/nginx/access.log

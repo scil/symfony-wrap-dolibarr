@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpHierarchyChecksInspection */
+<?php /** @noinspection PhpParamsInspection */
+
+/** @noinspection PhpHierarchyChecksInspection */
 
 namespace App\Legacy;
 
@@ -10,10 +12,15 @@ use Symfony\Component\Routing\RouteCollection;
 class LegacyRouteLoader extends Loader
 {
     protected $dolibarr_htdocs;
+    protected $old_url;
 
     public function __construct()
     {
-        $this->dolibarr_htdocs = $_ENV['DOLIBARR_HTDOCS']; // 'D:\vagrant\www\dolibarr\htdocs';
+        $this->dolibarr_htdocs = $_ENV['DOLIBARR_HTDOCS'];
+        $this->old_url = in_array(
+            strtolower($_ENV['DOLIBARR_STYLE_URL']),
+            ['1', 'true', 'yes',]
+        );
     }
 
     public function load($resource, $type = null)
@@ -25,10 +32,7 @@ class LegacyRouteLoader extends Loader
             ->notname('*.class.php')
             ->notname('*.lib.php')
             ->notname('*.inc.php')
-
-            ->notname('*.js.php')
-            ->notname('*.css.php')
-
+            ->notname('*.js.php')->notname('*.css.php')
             ->name('*.php');
         $finder->in($this->dolibarr_htdocs);
 
@@ -46,16 +50,19 @@ class LegacyRouteLoader extends Loader
             $filenameNoExt = basename($relativepath, '.php');
             // accountancy/admin
             $dirname = dirname($relativepath);
+
             $routeName = str_replace('/', '__', "{$dirname}__$filenameNoExt");
             // '.__index.php' origins from './index.php'
             $routeName = preg_replace('/^\.__/', '', $routeName);
             $routeName = sprintf('app.legacy.%s', $routeName);
 
-            $collection->add($routeName, new Route("$dirname/$filenameNoExt", [
-                '_controller' => 'App\Controller\LegacyController::loadLegacyScript',
-                'requestPath' => '/' . $relativepath,
-                'legacyScript' => $legacyScriptFile->getRealPath(),
-            ]));
+            $collection->add($routeName, new Route(
+                $this->old_url ? $relativepath : "$dirname/$filenameNoExt",
+                [
+                    '_controller' => 'App\Controller\LegacyController::loadLegacyScript',
+                    'requestPath' => '/' . $relativepath,
+                    'legacyScript' => $legacyScriptFile->getRealPath(),
+                ]));
         }
 
         return $collection;

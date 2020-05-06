@@ -8,8 +8,10 @@ class LegacyController
 {
     public function loadLegacyScript(string $requestPath, string $legacyScript)
     {
+        $me = $this;
+
         return new StreamedResponse(
-            function () use ($requestPath, $legacyScript) {
+            function () use ($requestPath, $legacyScript,$me) {
                 $_SERVER['PHP_SELF'] = $requestPath;
                 $_SERVER['SCRIPT_NAME'] = $requestPath;
                 $_SERVER['SCRIPT_FILENAME'] = $legacyScript;

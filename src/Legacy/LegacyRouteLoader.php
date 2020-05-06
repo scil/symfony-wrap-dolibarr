@@ -30,16 +30,24 @@ class LegacyRouteLoader extends Loader
 
         /** @var \SplFileInfo $legacyScriptFile */
         foreach ($finder as $legacyScriptFile) {
+            /*
+             * change
+             *  accountancy\admin\account.php
+             * to
+             * accountancy/admin/account.php
+             */
             $relativepath = str_replace('\\', '/', $legacyScriptFile->getRelativePathname());
 
-            $filename = basename($relativepath, '.php');
+            // account
+            $filenameNoExt = basename($relativepath, '.php');
+            // accountancy/admin
             $dirname = dirname($relativepath);
-            $routeName = str_replace('/', '__', "{$dirname}__$filename");
+            $routeName = str_replace('/', '__', "{$dirname}__$filenameNoExt");
             // '.__index.php' origins from './index.php'
             $routeName = preg_replace('/^\.__/', '', $routeName);
             $routeName = sprintf('app.legacy.%s', $routeName);
 
-            $collection->add($routeName, new Route($relativepath, [
+            $collection->add($routeName, new Route("$dirname/$filenameNoExt", [
                 '_controller' => 'App\Controller\LegacyController::loadLegacyScript',
                 'requestPath' => '/' . $relativepath,
                 'legacyScript' => $legacyScriptFile->getRealPath(),

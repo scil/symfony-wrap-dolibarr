@@ -24,6 +24,7 @@ class LegacyRouteLoader extends Loader
             ->notname('*.tpl.php')
             ->notname('*.class.php')
             ->notname('*.lib.php')
+            ->notname('*.inc.php')
             ->name('*.php');
         $finder->in($this->dolibarr_htdocs);
 

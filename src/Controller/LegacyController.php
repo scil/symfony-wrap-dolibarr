@@ -2,16 +2,27 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LegacyController
 {
+    /**
+     * only run legacyScript, can not support php function header(),
+     * because StreamedResponse send headers before sending content.
+     * So any `header(` in script does not work.
+     *
+     * @param string $requestPath
+     * @param string $legacyScript
+     * @return StreamedResponse
+     */
     public function loadLegacyScript(string $requestPath, string $legacyScript)
     {
-        $me = $this;
 
-        return new StreamedResponse(
-            function () use ($requestPath, $legacyScript,$me) {
+        $response = new StreamedResponse();
+
+        $response->setCallback(
+            function () use ($requestPath, $legacyScript) {
                 $_SERVER['PHP_SELF'] = $requestPath;
                 $_SERVER['SCRIPT_NAME'] = $requestPath;
                 $_SERVER['SCRIPT_FILENAME'] = $legacyScript;
@@ -158,7 +169,12 @@ class LegacyController
                 }
 
                 require $legacyScript;
+
             }
         );
+
+        return $response;
     }
+
+
 }

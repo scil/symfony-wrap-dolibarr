@@ -21,3 +21,8 @@ route not found?
 ```
 php bin/console cache:clear
 ```
+
+# todo
+- debug不成，那就用log 看，StreamedResponseHeaderFirst 为什么不能改变header
+- 考虑其它：不用 StreamedResponse, 用基类 Response和 ob_start
+- 还不行？如何获取header函数设置的内容呢？

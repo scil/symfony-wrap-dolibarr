@@ -1,5 +1,7 @@
 
-use `Legacy Route Loader` at [Migrating an Existing Application to Symfony](https://symfony.com/doc/current/migration.html#booting-symfony-in-a-front-controller)
+use `Legacy Route Loader` at [Migrating an Existing Application to Symfony](https://symfony.com/doc/current/migration.html#booting-symfony-in-a-front-controller), not the simper one `Front Controller with Legacy Bridge`.
+
+Why are the dolibarr global vars needed to be defined before require dolibarr script?
 
 # Start
 

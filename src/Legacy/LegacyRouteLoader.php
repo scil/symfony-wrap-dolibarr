@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpParamsInspection */
+<?php /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
 
 /** @noinspection PhpHierarchyChecksInspection */
 
@@ -59,17 +59,13 @@ class LegacyRouteLoader extends Loader
             $collection->add($routeName, new Route(
                 $this->old_url ? $relativepath : "$dirname/$filenameNoExt",
                 [
-                    '_controller' => 'App\Controller\LegacyController::'. $this->getMethod(),
+                    '_controller' => 'App\Controller\LegacyController::loadLegacyScript',
                     'requestPath' => '/' . $relativepath,
                     'legacyScript' => $legacyScriptFile->getRealPath(),
                 ]));
         }
 
         return $collection;
-    }
-
-    protected function getMethod(){
-        return $_ENV['DOLIBARR_STYLE_URL'];
     }
 
     /**

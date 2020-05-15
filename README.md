@@ -14,7 +14,7 @@ curl http://localhost:8000/user/card
 
 # To support png/css and `.js.php`, `.css.php`?  
 
-see  `nginx-vagrant/readme.md`
+see  Solution 2 in  `nginx-vagrant/readme.md`
 
 # Err?
 

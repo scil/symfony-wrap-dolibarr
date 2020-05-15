@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Legacy\NoSymfonyHeader_StreamedResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LegacyController
@@ -19,7 +19,10 @@ class LegacyController
     public function loadLegacyScript(string $requestPath, string $legacyScript)
     {
 
-        $response = new StreamedResponse();
+        // $response = new StreamedResponse();
+        // there's no dif between StreamedResponse and NoSymfonyHeader_StreamedResponse, the latter is only
+        // a reminder that headers determined by Dolibarr, not Symfony
+        $response = new NoSymfonyHeader_StreamedResponse();
 
         $response->setCallback(
             function () use ($requestPath, $legacyScript) {
@@ -172,6 +175,8 @@ class LegacyController
 
             }
         );
+
+
 
         return $response;
     }

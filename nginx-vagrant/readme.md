@@ -15,7 +15,6 @@ first edit nginx-site.conf to use proper path (this path can not contain ".." )
 
 ## Start
 
-then 
 ```
 # run nginx:
 php bin/console cache:clear 
@@ -27,14 +26,15 @@ curl localhost:8080/user/card.php
 
 ```
 
-to use xdebug,  在windows上运行
+## to use xdebug,  
+如果vagrant上面连接不到windows客户端，就在windows上运行端口映射
 ```
 # 原因见 xdebug.vagrant.ini
  "c:\Program Files\Git\usr\bin\ssh.exe"  -i D:\vagrant\ansible\files\key\vagrant\insecure_private_key -g -N -lvagrant -R9002:127.0.0.1:9002 192.168.1.200
 ```
 
-```
 ## shut down
+```
 killall nginx
 ```
 

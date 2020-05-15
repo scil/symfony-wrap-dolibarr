@@ -26,6 +26,14 @@ curl localhost:8080/user/card.php
 
 ```
 
+# Err?
+
+502 Bad Gateway?
+```
+# needed after each `sudo service php7.4-fpm restart`
+sudo chmod 777 /var/run/php/php7.4-fpm.sock 
+```
+
 ## to use xdebug,  
 如果vagrant上面连接不到windows客户端，就在windows上运行端口映射
 ```

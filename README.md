@@ -27,3 +27,4 @@ php bin/console cache:clear
 
 # todo
 - [ ] find a way to define all dolibarr global vars in `loadLegacyScript`
+- [ ] Symfony 会捕捉到这样的错误 $message = "Array and string offset access syntax with curly braces is deprecated"  如何忽略之呢

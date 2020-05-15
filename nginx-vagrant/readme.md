@@ -1,14 +1,19 @@
 
+# Solution 1 ：不用nginx，直接与 php-fpm 通信
+```
+# 先修改里面的地址
+./cgi.sh
+```
 
- use nginx.exe, not nginx service
+# Solution 2: use nginx.exe, not nginx service
 
-# Env
+## Env
 first edit nginx-site.conf to use proper path (this path can not contain ".." )
 ```
     		fastcgi_param SCRIPT_FILENAME /vagrant/www/dolibarr/htdocs$fastcgi_script_name;
 ```
 
-# Start
+## Start
 
 then 
 ```
@@ -22,19 +27,19 @@ curl localhost:8080/user/card.php
 
 ```
 
-to use xdebug,  ��windows������
+to use xdebug,  在windows上运行
 ```
-# ԭ��� xdebug.vagrant.ini
+# 原因见 xdebug.vagrant.ini
  "c:\Program Files\Git\usr\bin\ssh.exe"  -i D:\vagrant\ansible\files\key\vagrant\insecure_private_key -g -N -lvagrant -R9002:127.0.0.1:9002 192.168.1.200
 ```
 
 ```
-# shut down
+## shut down
 killall nginx
 ```
 
 
-# mechanism
+## mechanism
 
 - `.js.php` and `.css.php` are handled by nginx, not Symfony. Related code: 
     1. `->notname('*.js.php')->notname('*.css.php')`

@@ -23,3 +23,5 @@ route not found?
 php bin/console cache:clear
 ```
 
+# todo
+- [ ] find a way to define all dolibarr global vars in `loadLegacyScript`

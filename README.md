@@ -1,7 +1,11 @@
 
-use `Legacy Route Loader` at [Migrating an Existing Application to Symfony](https://symfony.com/doc/current/migration.html#booting-symfony-in-a-front-controller), not the simper one `Front Controller with Legacy Bridge`.
 
-Why are the dolibarr global vars needed to be defined before require dolibarr script?
+# How do
+- use `Legacy Route Loader` at [Migrating an Existing Application to Symfony](https://symfony.com/doc/current/migration.html#booting-symfony-in-a-front-controller), not the simper one `Front Controller with Legacy Bridge`.
+
+- dolibarr global vars are defined before require dolibarr script. Why?
+
+- use `error_reporting`  to ignore E_DEPRECATED
 
 # Start
 
@@ -27,4 +31,4 @@ php bin/console cache:clear
 
 # todo
 - [ ] find a way to define all dolibarr global vars in `loadLegacyScript`
-- [ ] Symfony »á²¶×½µ½ÕâÑùµÄ´íÎó $message = "Array and string offset access syntax with curly braces is deprecated"  ÈçºÎºöÂÔÖ®ÄØ
+- [ ] Symfony ï¿½á²¶×½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ $message = "Array and string offset access syntax with curly braces is deprecated"  ï¿½ï¿½Îºï¿½ï¿½ï¿½Ö®ï¿½ï¿½

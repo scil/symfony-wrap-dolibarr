@@ -5,7 +5,7 @@
 
 - dolibarr global vars are defined before require dolibarr script. Why?
 
-- use `error_reporting`  to ignore E_DEPRECATED
+- ~~use error_reporting to ignore E_DEPRECATED~~  it does not work, maybe reason is Dolibarr also uses error_reporting.
 
 # Start
 
@@ -31,4 +31,4 @@ php bin/console cache:clear
 
 # todo
 - [ ] find a way to define all dolibarr global vars in `loadLegacyScript`
-- [ ] Symfony �Ჶ׽�������Ĵ��� $message = "Array and string offset access syntax with curly braces is deprecated"  ��κ���֮��
+- [ ] Symfony $type = 8192;  $message = "Array and string offset access syntax with curly braces is deprecated"

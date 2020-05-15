@@ -177,9 +177,10 @@ class LegacyController
                 $type = 8192 // is E_DEPRECATED
                 $message = "Array and string offset access syntax with curly braces is deprecated"
                  */
-                $level = error_reporting();
-                $level |= E_RECOVERABLE_ERROR | E_USER_ERROR | E_DEPRECATED | E_USER_DEPRECATED;
-                error_reporting($level  & ~E_DEPRECATED& ~E_USER_DEPRECATED);
+                // does not work, maybe reason is Dolibarr also uses error_reporting.
+//                $level = error_reporting();
+//                $level |= E_RECOVERABLE_ERROR | E_USER_ERROR | E_DEPRECATED | E_USER_DEPRECATED;
+//                error_reporting($level  & ~E_DEPRECATED& ~E_USER_DEPRECATED);
 
                 require $legacyScript;
 

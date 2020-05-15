@@ -12,14 +12,21 @@ curl http://localhost:8000/user/card.php
 curl http://localhost:8000/user/card
 ```
 
-To support png/css and `.js.php`, `.css.php`?  
-`nginx/readme.md`
+# To support png/css and `.js.php`, `.css.php`?  
+
+see  `nginx-vagrant/readme.md`
 
 # Err?
 
 route not found?
 ```
 php bin/console cache:clear
+```
+
+502 Bad Gateway?
+```
+# needed after each `sudo service php7.4-fpm restart`
+sudo chmod 777 /var/run/php/php7.4-fpm.sock 
 ```
 
 # todo
